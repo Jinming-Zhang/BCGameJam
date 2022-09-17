@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour, IGameManager
 
     public void EndGame()
     {
+        RestartGame();
     }
 
     [ContextMenu("Test Restart")]
