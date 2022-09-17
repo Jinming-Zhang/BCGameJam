@@ -5,6 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour, IGameManager
 {
+    private static GameManager instance;
+    public static GameManager Instance => instance;
+    private void Awake()
+    {
+        if (instance && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
     [SerializeField]
     float gameDurationInSec = 120;
 
@@ -27,6 +41,7 @@ public class GameManager : MonoBehaviour, IGameManager
     {
     }
 
+    [ContextMenu("Test Restart")]
     public void RestartGame()
     {
         Scene scene = SceneManager.GetActiveScene();
