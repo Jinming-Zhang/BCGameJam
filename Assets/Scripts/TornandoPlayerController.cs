@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof( CharacterController ))]
-public class TornandoPlayerController : MonoBehaviour, IPlayerController
+public class TornandoPlayerController : PlayerController
 {
     [SerializeField] private float playerSpeedX = 1f;
     [SerializeField] private float playerSpeedY = 1f;
@@ -23,7 +23,7 @@ public class TornandoPlayerController : MonoBehaviour, IPlayerController
         characterController.Move(move * Time.deltaTime);
     }
 
-    public void DoPowerup(float value)
+    public override void DoPowerup(float value)
     {
         powerupCount++;
         Debug.Log($"Powerup count: {powerupCount}");
