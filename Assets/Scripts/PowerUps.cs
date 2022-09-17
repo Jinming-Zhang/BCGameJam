@@ -41,6 +41,10 @@ public class PowerUps : MonoBehaviour, IPowerupable
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (!other.CompareTag("Player")) return;
+        var playerController = other.gameObject.GetComponent<TornandoPlayerController>();
+        if (playerController == null) return;
+        playerController.DoPowerup(1);
+
     }
 }
