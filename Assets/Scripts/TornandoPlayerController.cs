@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof( CharacterController ))]
+[RequireComponent(typeof(Collider))]
 public class TornandoPlayerController : PlayerController
 {
     [SerializeField] private float playerSpeedX = 1f;
     [SerializeField] private float playerSpeedY = 1f;
 
     private CharacterController characterController;
+    
+    public int PowerupCount { get; private set; }
 
-    private int powerupCount = 0;
 
     void Start()
     {
@@ -25,8 +27,8 @@ public class TornandoPlayerController : PlayerController
 
     public override void DoPowerup(float value)
     {
-        powerupCount++;
-        Debug.Log($"Powerup count: {powerupCount}");
+        PowerupCount++;
+        Debug.Log($"Powerup count: {PowerupCount}");
     }
     
 }
