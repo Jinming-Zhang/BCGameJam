@@ -1,21 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour, IGameManager
 {
+    [SerializeField]
+    float gameDurationInSec = 120;
+
+    private float timeCounter;
+    private bool gameRunning;
+
+    private void Update()
+    {
+        if (gameRunning)
+        {
+            timeCounter += Time.deltaTime;
+            if (timeCounter > gameDurationInSec)
+            {
+                EndGame();
+            }
+        }
+    }
+
     public void EndGame()
     {
-        throw new System.NotImplementedException();
     }
 
     public void RestartGame()
     {
-        throw new System.NotImplementedException();
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
     public void StartGame()
     {
-        throw new System.NotImplementedException();
+        gameRunning = true;
     }
 }
