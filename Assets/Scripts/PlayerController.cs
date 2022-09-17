@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof( CharacterController ))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float playerSpeed = 1f;
+    [SerializeField] private float playerSpeedX = 1f;
+    [SerializeField] private float playerSpeedY = 1f;
 
     private CharacterController characterController;
 
@@ -16,16 +17,8 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        // if (Input.GetKey(KeyCode.D))
-        // {
-        //     gameObject.transform.position += Vector3.right * speedPerSec * Time.deltaTime;
-        // }
-        // else if (Input.GetKey(KeyCode.A))
-        // {
-        //     gameObject.transform.position += Vector3.left * speedPerSec * Time.deltaTime;
-        // }
-        
-        var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-        characterController.Move(move * Time.deltaTime * playerSpeed);
+        var move = new Vector3(Input.GetAxis("Horizontal") * playerSpeedX, Input.GetAxis("Vertical") * playerSpeedY, 0);
+        characterController.Move(move * Time.deltaTime);
     }
+    
 }
