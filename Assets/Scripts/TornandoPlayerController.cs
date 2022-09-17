@@ -11,7 +11,7 @@ public class TornandoPlayerController : PlayerController
 
     private CharacterController characterController;
     
-    public int PowerupCount { get; private set; }
+    public float PowerupCount { get; private set; }
 
 
     void Start()
@@ -27,8 +27,7 @@ public class TornandoPlayerController : PlayerController
 
     public override void DoPowerup(float value)
     {
-        PowerupCount++;
-        Debug.Log($"Powerup count: {PowerupCount}");
+        PowerupCount += value;
     }
     
 }
