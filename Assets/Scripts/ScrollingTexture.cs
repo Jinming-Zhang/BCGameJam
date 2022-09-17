@@ -8,6 +8,8 @@ public class ScrollingTexture : MonoBehaviour
     float hspeed = .5f;
     [SerializeField]
     float vspeed = .5f;
+    [SerializeField]
+    float vAmplitute = .1f;
 
     Renderer bgRenderer;
     private void Start()
@@ -17,6 +19,10 @@ public class ScrollingTexture : MonoBehaviour
 
     private void Update()
     {
-        bgRenderer.material.mainTextureOffset += new Vector2(hspeed * Time.deltaTime, vspeed * Time.deltaTime);
+        // hoffset
+        bgRenderer.material.mainTextureOffset += new Vector2(hspeed * Time.deltaTime, 0);
+        // voffset
+        //float vOffset = vAmplitute * Mathf.Sin(vspeed);
+        //bgRenderer.material.mainTextureOffset += new Vector2(0, vOffset);
     }
 }
