@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof( CharacterController ))]
+[RequireComponent(typeof(Collider))]
 public class TornandoPlayerController : PlayerController
 {
     [SerializeField] private float playerSpeedX = 1f;
