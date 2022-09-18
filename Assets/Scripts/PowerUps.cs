@@ -11,6 +11,7 @@ public class PowerUps : MonoBehaviour, IPowerupable
     private float lifeTime;
     private float totalLifeTime = 10;
     public int countDownTime = 3;
+   
     //if player >= powerValue
     //PowerUp
     //else
@@ -54,9 +55,10 @@ public class PowerUps : MonoBehaviour, IPowerupable
 
     // Start is called before the first frame update
     
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        
+        if (other.gameObject.CompareTag("Player"))
         {
             var playerController = other.gameObject.GetComponent<TornandoPlayerController>();
             if (playerController == null) return;
@@ -73,25 +75,18 @@ public class PowerUps : MonoBehaviour, IPowerupable
             if (dontDestroyAfterTrigger) return;
             this.gameObject.SetActive(false);
         }
-        if (other.CompareTag("DeathZone")) 
+        if (other.gameObject.CompareTag("DeathZone")) 
         {
-            Debug.Log("Touched the death zone!");
+           // Debug.Log("Touched the death zone!");
             this.gameObject.SetActive(false);
         }
         
     }
     void Update()
     {
-        transform.Translate(currSpeed * Vector3.left * Time.deltaTime);
+      transform.Translate(currSpeed * Vector3.left * Time.deltaTime);
 
     }
-    void OnEnable() {
-        lifeTime = 0;
-        
-    }
-    IEnumerator CountDown() {
-        yield return new WaitForSeconds(countDownTime);
-        Debug.Log("Coroutine starts!");
-        this.gameObject.SetActive(false);
-    }
+   
+   
 }
