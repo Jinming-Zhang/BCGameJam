@@ -12,8 +12,6 @@ public class GameManager : MonoBehaviour, IGameManager
     LandScroller landScroller;
     [SerializeField]
     float landInSpeed;
-    //[SerializeField]
-    //float midlandSlidSpeed = 7;
 
     [Header("Game Ending settings")]
     [SerializeField]
@@ -26,6 +24,8 @@ public class GameManager : MonoBehaviour, IGameManager
     [SerializeField]
     float pausingDuration = 2f;
 
+    [SerializeField]
+    CanvasGroup hudCg;
     private void Awake()
     {
         if (instance && instance != this)
@@ -66,6 +66,8 @@ public class GameManager : MonoBehaviour, IGameManager
     public void EndGame()
     {
         StartCoroutine(MovingEndingInCR());
+        StartCoroutine(FadingOutCanvasCR());
+
         IEnumerator MovingEndingInCR()
         {
             Vector3 pos = endingBackgroundDistination.transform.position;
@@ -77,6 +79,16 @@ public class GameManager : MonoBehaviour, IGameManager
             }
             yield return new WaitForSeconds(pausingDuration);
             ShowResultScreen();
+        }
+
+        IEnumerator FadingOutCanvasCR()
+        {
+            hudCg.alpha = 1;
+            while (hudCg.alpha > 0)
+            {
+                hudCg.alpha -= Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
         }
     }
 
@@ -115,12 +127,9 @@ public class GameManager : MonoBehaviour, IGameManager
                 yield return new WaitForEndOfFrame();
             }
             landScroller.StartLooping();
-            yield return new WaitForSeconds(8);
-            MovingOutLand();
         }
-
-
     }
+
     [ContextMenu("Moving out land")]
     public void MovingOutLand()
     {
