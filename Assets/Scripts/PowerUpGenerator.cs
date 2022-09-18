@@ -34,6 +34,7 @@ public class PowerUpGenerator : MonoBehaviour
             SpriteRenderer spriteImage = powerups.GetComponent(typeof(SpriteRenderer)) as SpriteRenderer;
             int index = Random.Range(0, sprites.Count);
             spriteImage.sprite = sprites[index];
+            
             powerups.GetComponent<PowerUps>().powerValue=index;
             PolygonCollider2D polyCollider = powerups.GetComponent(typeof(PolygonCollider2D)) as PolygonCollider2D;
             Destroy(polyCollider);

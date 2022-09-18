@@ -44,7 +44,6 @@ public class MainMenu : MonoBehaviour
         RemoveButterflyStage(cocoonHatch);
         SetButterflyStage(butterfly);
         yield return new WaitForSeconds(stageTimer);
-
         SceneManager.LoadScene(loadingScreen);
     }
 
