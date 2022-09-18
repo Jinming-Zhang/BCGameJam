@@ -2,7 +2,7 @@
 
 public abstract class PlayerController : MonoBehaviour, IPlayerController
 {
-    public virtual void DoPowerup(float value)
+    public virtual void DoPowerup(int value)
     {
         throw new System.NotImplementedException();
     }

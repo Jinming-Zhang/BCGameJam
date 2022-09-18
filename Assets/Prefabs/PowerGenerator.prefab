@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1442004685620697333}
   - component: {fileID: 1442004685620697332}
+  - component: {fileID: 8446817136681632054}
   m_Layer: 0
   m_Name: PowerGenerator
   m_TagString: Untagged
@@ -44,5 +45,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9499fd3999e86e9468d5fd6ca07114cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpObj: {fileID: 0}
-  coolDownTimer: 1
+  powerUpObj: []
+  coolDownTimer: 3
+  sprites:
+  - {fileID: 21300000, guid: 461d4cccd01ee494ca10cdb1f4176668, type: 3}
+  - {fileID: 21300000, guid: b3a388f2f73d77f4d8efdef80b6a977e, type: 3}
+  - {fileID: 21300000, guid: a65982b5d1b77bd4b906b1233e436d2a, type: 3}
+  - {fileID: 21300000, guid: 9eac964907b72724ea682278835e2542, type: 3}
+  - {fileID: 21300000, guid: 0fd1fe2d062a18c4a8163719d3a0beb2, type: 3}
+  - {fileID: 21300000, guid: 5c58c37e307a6d54897405f9ac0ee789, type: 3}
+--- !u!114 &8446817136681632054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442004685620697331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9642d6dedf8a7fa468d4dd9748854eb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  objectToPool: {fileID: 0}
+  amountToPool: 20
