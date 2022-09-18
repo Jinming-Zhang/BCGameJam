@@ -6,7 +6,7 @@ public class PowerUps : MonoBehaviour, IPowerupable
 {
     [SerializeField] private int powerValue;
     [SerializeField] private float speed = 1f;
-    [SerializeField] private bool dontDestroyAfterTrigger;
+    
 
     //if player >= powerValue
     //PowerUp
@@ -19,6 +19,11 @@ public class PowerUps : MonoBehaviour, IPowerupable
         Force = 3
     }
     [SerializeField] PowerUpType powerUpType;
+    
+    
+    [Header("Debug")]
+    [SerializeField] private bool dontDestroyAfterTrigger;
+    
     public float Speed
     {
         get { return speed; }
