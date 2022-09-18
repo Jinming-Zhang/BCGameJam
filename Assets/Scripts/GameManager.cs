@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour, IGameManager
     private static GameManager instance;
     public static GameManager Instance => instance;
 
-
     [Header("Game Ending settings")]
     [SerializeField]
     GameObject endingBackground;
@@ -37,14 +36,20 @@ public class GameManager : MonoBehaviour, IGameManager
 
     private float timeCounter;
     private bool gameRunning;
+    private void Start()
+    {
+        StartGame();
+    }
 
     private void Update()
     {
         if (gameRunning)
         {
             timeCounter += Time.deltaTime;
+            UIManager.Instance.UpdateCountdownTimer(gameDurationInSec - timeCounter);
             if (timeCounter > gameDurationInSec)
             {
+                gameRunning = false;
                 EndGame();
             }
         }
@@ -73,13 +78,14 @@ public class GameManager : MonoBehaviour, IGameManager
 
     }
 
-    [ContextMenu("Test Restart")]
+    [ContextMenu("Restart Game")]
     public void RestartGame()
     {
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
 
+    [ContextMenu("Start Game")]
     public void StartGame()
     {
         gameRunning = true;
