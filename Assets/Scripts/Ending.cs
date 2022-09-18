@@ -46,22 +46,22 @@ public class Ending : MonoBehaviour
     public IEnumerator Ending1()
     {
         background.GetComponent<Image>().sprite = paris;
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(5.0f);
         FlashDarkGod();
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(3.0f);
         background.GetComponent<Image>().sprite = parisDestroy;
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(5.0f);
         background.GetComponent<Image>().sprite = newsPaper;
 
     }
     public IEnumerator Ending2()
     {
         background.GetComponent<Image>().sprite = newYork;
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(5.0f);
         FlashDarkGod();
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(3.0f);
         background.GetComponent<Image>().sprite = newYorkDestroy;
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(5.0f);
         background.GetComponent<Image>().sprite = newsPaper;
     }
 
