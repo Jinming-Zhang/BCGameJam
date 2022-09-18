@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f198d8989298a274d86aaf0371d252db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hspeed: 0.2
+  hspeed: 0.1
   vspeed: 1
   vAmplitute: 0.1
 --- !u!23 &338785300
@@ -1127,7 +1127,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 943017320, guid: 8ec8e7d0992f3e346b972510c5b7f93f, type: 3}
       propertyPath: hspeed
-      value: 0.1
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1938466089, guid: 8ec8e7d0992f3e346b972510c5b7f93f, type: 3}
       propertyPath: m_LocalScale.x
