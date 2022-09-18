@@ -16,9 +16,13 @@ public class MainMenu : MonoBehaviour
     private bool isStart;
     [SerializeField] float stageTimer;
 
+    [SerializeField] GameObject crack;
+    private AudioSource crackSound;
+
     void Start()
     {
         SetButterflyStage(cocoon);
+        crackSound = crack.GetComponent<AudioSource>();
     }
 
     public void StartGame()
@@ -32,12 +36,12 @@ public class MainMenu : MonoBehaviour
 
     public IEnumerator ChangeButterfly()
     {
+        PlayCrackSound();
         RemoveButterflyStage(cocoon);
-        yield return new WaitForSeconds(stageTimer);
         SetButterflyStage(cocoonHatch);
         yield return new WaitForSeconds(stageTimer);
+        PlayCrackSound();
         RemoveButterflyStage(cocoonHatch);
-        yield return new WaitForSeconds(stageTimer);
         SetButterflyStage(butterfly);
         yield return new WaitForSeconds(stageTimer);
 
@@ -73,5 +77,10 @@ public class MainMenu : MonoBehaviour
 
             transparency -= Time.deltaTime / 1000;
         }
+    }
+
+    void PlayCrackSound()
+    {
+        crackSound.Play();
     }
 }
