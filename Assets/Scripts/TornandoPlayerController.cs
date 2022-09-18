@@ -11,6 +11,9 @@ public class TornandoPlayerController : PlayerController
     [SerializeField] private float playerSpeedX = 1f;
     [SerializeField] private float playerSpeedY = 1f;
     [SerializeField] private float initialPowerupCount = 1;
+    [SerializeField] private float scaleStep = .1f;
+    [SerializeField] private float scaleMax = 2f;
+    [SerializeField] private float scaleMin = .1f;
 
     private CharacterController characterController;
     private Vector2 viewportMin;
@@ -43,7 +46,7 @@ public class TornandoPlayerController : PlayerController
         
         if (tryMoveMax.x > UIManager.Instance.ViewportMax.x || tryMoveMin.x < UIManager.Instance.ViewportMin.x) move.x = 0;
         if (tryMoveMax.y > UIManager.Instance.ViewportMax.y || tryMoveMin.y < UIManager.Instance.ViewportMin.y) move.y = 0;
-        Debug.Log($"move: {move}, trymin:{tryMoveMin}, trymax:{tryMoveMax}, viewport min: {UIManager.Instance.ViewportMin}, viewport max:{UIManager.Instance.ViewportMax}");
+        // Debug.Log($"move: {move}, trymin:{tryMoveMin}, trymax:{tryMoveMax}, viewport min: {UIManager.Instance.ViewportMin}, viewport max:{UIManager.Instance.ViewportMax}");
         
         characterController.Move(move * Time.deltaTime);
         
@@ -54,6 +57,12 @@ public class TornandoPlayerController : PlayerController
         PowerupCount += value;
         Debug.Log($"Player powerup count: {PowerupCount}");
         if (PowerupCount < 0) DoDie();
+        var newLocalScale = transform.localScale;
+        newLocalScale += Vector3.one * scaleStep * (value >= 0 ? 1 : -1);
+        newLocalScale.x = Mathf.Clamp(newLocalScale.x, scaleMin, scaleMax);
+        newLocalScale.y = Mathf.Clamp(newLocalScale.y, scaleMin, scaleMax);
+        newLocalScale.z = transform.localScale.z;
+        transform.localScale = newLocalScale;
     }
 
     private void DoDie()
