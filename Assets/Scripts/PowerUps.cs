@@ -18,7 +18,11 @@ public class PowerUps : MonoBehaviour, IPowerupable
         Force = 3
     }
     [SerializeField] PowerUpType powerUpType;
-    public float PowerUpMovement { get; private set; }
+    public float Speed
+    {
+        get { return speed; }
+        set { speed = value; }
+    }
 
     public void ForceUp()
     {
