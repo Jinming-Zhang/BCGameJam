@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &367449903 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1224298777744917668, guid: 33102ff6e8aa6404f94755ac8212e154,
+    type: 3}
+  m_PrefabInstance: {fileID: 1224298776715147805}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &470309362
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +162,7 @@ MonoBehaviour:
   endingBackgroundDistination: {fileID: 1120208911}
   slidingSpeed: 5
   pausingDuration: 2
-  gameDurationInSec: 120
+  gameDurationInSec: 10
 --- !u!4 &470309364
 Transform:
   m_ObjectHideFlags: 0
@@ -593,6 +599,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248855135}
   m_CullTransparentMesh: 1
+--- !u!1 &1878761043 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1224298776858595724, guid: 33102ff6e8aa6404f94755ac8212e154,
+    type: 3}
+  m_PrefabInstance: {fileID: 1224298776715147805}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1878761045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878761043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6292d4a77aea6b940af6e56783040bad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hudUI: {fileID: 367449903}
+  resultUI: {fileID: 0}
+  countdownText: {fileID: 666786484}
 --- !u!1 &1938466088 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1938466088, guid: 8ec8e7d0992f3e346b972510c5b7f93f,
