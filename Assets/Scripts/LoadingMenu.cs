@@ -17,6 +17,8 @@ public class LoadingMenu : MonoBehaviour
 
     [SerializeField] Button button;
 
+    [SerializeField] GameObject tornado;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class LoadingMenu : MonoBehaviour
     {
         TransitionToMainGame();
         UpdateButterflyImage();
+        UpdateTornadoAnimSize();
     }
 
     public void IncreaseLoadingTimer()
@@ -74,4 +77,10 @@ public class LoadingMenu : MonoBehaviour
             button.GetComponent<Image>().sprite = butterfly1;
         }
     }
+
+    private void UpdateTornadoAnimSize()
+    {
+        float scale = loadingTimer / 10;
+        tornado.transform.localScale = new Vector3(scale, scale, 0);
+    }    
 }
