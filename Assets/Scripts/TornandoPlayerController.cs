@@ -11,16 +11,18 @@ public class TornandoPlayerController : PlayerController
 {
     [SerializeField] private float playerSpeedX = 1f;
     [SerializeField] private float playerSpeedY = 1f;
-    [SerializeField] private float initialPowerupCount = 1;
+    [SerializeField] private int initialPowerupCount = 0;
     [SerializeField] private float scaleStep = .1f;
     [SerializeField] private float scaleMax = 2f;
     [SerializeField] private float scaleMin = .1f;
+    [SerializeField] private int powerUpMax = 5;
 
     private BoxCollider2D box2D;
     private Vector2 viewportMin;
     private Vector2 viewportMax;
 
-    public float PowerupCount { get; private set; }
+    public int PowerupCount { get; private set; }
+    public int PowerupMax => powerUpMax;
 
 
     void Start()
@@ -54,14 +56,17 @@ public class TornandoPlayerController : PlayerController
 
     }
 
-    public override void DoPowerup(float value)
+    public override void DoPowerup(int value)
     {
-        PowerupCount += value;
-        PowerupCount = Mathf.Max(0, PowerupCount);
+        var isIncrease = value < PowerupCount || PowerupCount == PowerupMax;
+        if(isIncrease) PowerupCount++; else PowerupCount--;
+        PowerupCount = Mathf.Clamp(PowerupCount, 0, PowerupMax);
+        
         Debug.Log($"Player powerup count: {PowerupCount}");
         if (PowerupCount < 0) DoDie();
+        
         var newLocalScale = transform.localScale;
-        newLocalScale += Vector3.one * scaleStep * (value >= 0 ? 1 : -1);
+        newLocalScale += Vector3.one * scaleStep * (isIncrease ? 1 : -1);
         newLocalScale.x = Mathf.Clamp(newLocalScale.x, scaleMin, scaleMax);
         newLocalScale.y = Mathf.Clamp(newLocalScale.y, scaleMin, scaleMax);
         newLocalScale.z = transform.localScale.z;
