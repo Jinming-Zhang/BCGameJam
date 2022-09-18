@@ -5,6 +5,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.UIElements;
+using TMPro;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class TornandoPlayerController : PlayerController
@@ -12,10 +13,14 @@ public class TornandoPlayerController : PlayerController
     [SerializeField] private float playerSpeedX = 1f;
     [SerializeField] private float playerSpeedY = 1f;
     [SerializeField] private int initialPowerupCount = 0;
-    [SerializeField] private float scaleStep = .1f;
-    [SerializeField] private float scaleMax = 2f;
-    [SerializeField] private float scaleMin = .1f;
+    [SerializeField] private Vector3 initialScale = new Vector3(1, 1, 1);
+    
+    [SerializeField] private float scaleStep = .5f;
+    [SerializeField] private float scaleMax = 3.5f;
+    [SerializeField] private float scaleMin = 1f;
     [SerializeField] private int powerUpMax = 5;
+
+    [SerializeField] private TextMeshProUGUI speedText;
 
     private BoxCollider2D box2D;
     private Vector2 viewportMin;
@@ -31,6 +36,10 @@ public class TornandoPlayerController : PlayerController
         viewportMin = UIManager.Instance.ViewportMin;
         viewportMax = UIManager.Instance.ViewportMax;
         box2D = GetComponent<BoxCollider2D>();
+        transform.localScale = initialScale;
+        if (speedText != null) speedText.text = $"{(1 + PowerupCount) * 100}KM/H";
+        playerSpeedX = 1 + PowerupCount;
+        playerSpeedY = 1 + PowerupCount;
     }
 
     void Update()
@@ -60,11 +69,14 @@ public class TornandoPlayerController : PlayerController
     {
         var isIncrease = value < PowerupCount || PowerupCount == PowerupMax;
         if(isIncrease) PowerupCount++; else PowerupCount--;
+        if (PowerupCount < 0) DoDie();
+        
         PowerupCount = Mathf.Clamp(PowerupCount, 0, PowerupMax);
         
         Debug.Log($"Player powerup count: {PowerupCount}");
-        if (PowerupCount < 0) DoDie();
-        
+        if (speedText != null) speedText.text = $"{(1+PowerupCount) * 100}KM/H";
+        playerSpeedX = 1 + PowerupCount;
+        playerSpeedY = 1 + PowerupCount;        
         var newLocalScale = transform.localScale;
         newLocalScale += Vector3.one * scaleStep * (isIncrease ? 1 : -1);
         newLocalScale.x = Mathf.Clamp(newLocalScale.x, scaleMin, scaleMax);
