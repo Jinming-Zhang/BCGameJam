@@ -56,6 +56,14 @@ public class LoadingMenu : MonoBehaviour
 
     private void TransitionToMainGame()
     {
+        if(loadingTimer >= 8)
+        {
+            if (GameObject.FindGameObjectWithTag("BG Music") != null)
+            {
+                GameObject.FindGameObjectWithTag("BG Music").GetComponent<BGMusic>().FadeMusic();
+            }
+        }
+        
         if (loadingTimer >= 10)
         {
             StopMenuMusic();
