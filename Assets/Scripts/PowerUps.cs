@@ -6,6 +6,7 @@ public class PowerUps : MonoBehaviour, IPowerupable
 {
     [SerializeField] private int powerValue;
     [SerializeField] private float speed = 1f;
+    
 
     //if player >= powerValue
     //PowerUp
@@ -18,6 +19,11 @@ public class PowerUps : MonoBehaviour, IPowerupable
         Force = 3
     }
     [SerializeField] PowerUpType powerUpType;
+    
+    
+    [Header("Debug")]
+    [SerializeField] private bool dontDestroyAfterTrigger;
+    
     public float Speed
     {
         get { return speed; }
@@ -49,16 +55,13 @@ public class PowerUps : MonoBehaviour, IPowerupable
         float playerPowerValue = playerController.PowerupCount;
         if (playerPowerValue < powerValue)
         {
-            if (playerPowerValue <= 1f) {
-                //player dies
-            }
-            else { 
-                playerController.DoPowerup(-1);
-            }
+            playerController.DoPowerup(-1);
         }
         else {
             playerController.DoPowerup(1);
         }
+
+        if (dontDestroyAfterTrigger) return;
         Destroy(this.gameObject);
     }
     void Update()
