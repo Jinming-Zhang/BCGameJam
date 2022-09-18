@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour, IGameManager
     [SerializeField]
     float slidingSpeed = 1f;
 
+    [SerializeField]
+    float pausingDuration = 2f;
+
     private void Awake()
     {
         if (instance && instance != this)
@@ -47,19 +50,27 @@ public class GameManager : MonoBehaviour, IGameManager
         }
     }
 
-    [ContextMenu("End Restart")]
+    [ContextMenu("End Game")]
     public void EndGame()
     {
         StartCoroutine(MovingEndingInCR());
         IEnumerator MovingEndingInCR()
         {
-            Vector3 distinationPosition = endingBackgroundDistination.transform.position;
+            Vector3 pos = endingBackgroundDistination.transform.position;
+            Vector3 distinationPosition = new Vector3(pos.x, pos.y, endingBackground.transform.position.z);
             while (Vector3.Distance(endingBackground.transform.position, distinationPosition) > .001f)
             {
                 endingBackground.transform.position = Vector3.MoveTowards(endingBackground.transform.position, distinationPosition, slidingSpeed * Time.deltaTime);
                 yield return new WaitForEndOfFrame();
             }
+            yield return new WaitForSeconds(pausingDuration);
+            ShowResultScreen();
         }
+    }
+
+    public void ShowResultScreen()
+    {
+
     }
 
     [ContextMenu("Test Restart")]
