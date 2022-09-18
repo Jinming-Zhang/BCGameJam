@@ -44,13 +44,20 @@ public class PowerUps : MonoBehaviour, IPowerupable
         if (!other.CompareTag("Player")) return;
         var playerController = other.gameObject.GetComponent<TornandoPlayerController>();
         if (playerController == null) return;
-        int playerPowerValue = playerController.PowerupCount;
-        if (playerPowerValue < powerValue)
+        float playerPowerValue = playerController.PowerupCount;
+        if (playerPowerValue < powerValue )
         {
-            playerController.DoPowerup(-1);
+            if (playerPowerValue <= 0)
+            {
+                //player dies
+            }
+            else
+            {
+                playerController.DoPowerup(-1f);
+            }
         }
         else {
-            playerController.DoPowerup(1);
+            playerController.DoPowerup(1f);
         }
         Destroy(this.gameObject);
     }
