@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
         ? Vector2.zero
         : Camera.main.WorldToViewportPoint(gameAreaWorldMin.transform.position);
     public Vector2 ViewportMax => gameAreaWorldMax == null
-        ? Vector2.zero
+        ? Vector2.one
         : Camera.main.WorldToViewportPoint(gameAreaWorldMax.transform.position);
 
 
@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour
         {
             instance = this;
         }
-        
+
     }
 
     // Start is called before the first frame update
