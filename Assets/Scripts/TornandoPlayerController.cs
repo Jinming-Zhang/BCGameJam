@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UIElements;
@@ -55,6 +56,7 @@ public class TornandoPlayerController : PlayerController
     public override void DoPowerup(float value)
     {
         PowerupCount += value;
+        PowerupCount = Mathf.Max(0, PowerupCount);
         Debug.Log($"Player powerup count: {PowerupCount}");
         if (PowerupCount < 0) DoDie();
         var newLocalScale = transform.localScale;
