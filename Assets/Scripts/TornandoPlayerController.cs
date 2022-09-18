@@ -9,6 +9,7 @@ public class TornandoPlayerController : PlayerController
 {
     [SerializeField] private float playerSpeedX = 1f;
     [SerializeField] private float playerSpeedY = 1f;
+    [SerializeField] private float initialPowerupCount = 1;
 
     private CharacterController characterController;
     
@@ -18,6 +19,7 @@ public class TornandoPlayerController : PlayerController
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        PowerupCount = initialPowerupCount;
     }
     
     void Update()
@@ -36,7 +38,7 @@ public class TornandoPlayerController : PlayerController
     public override void DoPowerup(float value)
     {
         PowerupCount += value;
-        if (PowerupCount <= 0) DoDie();
+        if (PowerupCount < 0) DoDie();
     }
 
     private void DoDie()
