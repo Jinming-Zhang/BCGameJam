@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UIElements;
@@ -11,6 +12,9 @@ public class TornandoPlayerController : PlayerController
     [SerializeField] private float playerSpeedX = 1f;
     [SerializeField] private float playerSpeedY = 1f;
     [SerializeField] private float initialPowerupCount = 1;
+    [SerializeField] private float scaleStep = .1f;
+    [SerializeField] private float scaleMax = 2f;
+    [SerializeField] private float scaleMin = .1f;
 
     private CharacterController characterController;
     private Vector2 viewportMin;
@@ -30,7 +34,7 @@ public class TornandoPlayerController : PlayerController
     void Update()
     {
         var move = new Vector3(Input.GetAxis("Horizontal") * playerSpeedX, Input.GetAxis("Vertical") * playerSpeedY, 0);
-        // if (move.magnitude <= 0f) return;
+        if (Mathf.Approximately(move.magnitude, 0f)) return;
 
         var colliderOffset = new Vector3(characterController.radius, characterController.height * .5f, 0);
         var tryMoveMax = gameObject.transform.position + colliderOffset + move * Time.deltaTime;
@@ -46,13 +50,21 @@ public class TornandoPlayerController : PlayerController
         // Debug.Log($"move: {move}, trymin:{tryMoveMin}, trymax:{tryMoveMax}, viewport min: {UIManager.Instance.ViewportMin}, viewport max:{UIManager.Instance.ViewportMax}");
         
         characterController.Move(move * Time.deltaTime);
+        
     }
 
     public override void DoPowerup(float value)
     {
         PowerupCount += value;
+        PowerupCount = Mathf.Max(0, PowerupCount);
         Debug.Log($"Player powerup count: {PowerupCount}");
         if (PowerupCount < 0) DoDie();
+        var newLocalScale = transform.localScale;
+        newLocalScale += Vector3.one * scaleStep * (value >= 0 ? 1 : -1);
+        newLocalScale.x = Mathf.Clamp(newLocalScale.x, scaleMin, scaleMax);
+        newLocalScale.y = Mathf.Clamp(newLocalScale.y, scaleMin, scaleMax);
+        newLocalScale.z = transform.localScale.z;
+        transform.localScale = newLocalScale;
     }
 
     private void DoDie()
