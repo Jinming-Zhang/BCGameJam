@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class TornandoPlayerController : PlayerController
 {
     [SerializeField] private float playerSpeedX = 1f;
