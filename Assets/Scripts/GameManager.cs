@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour, IGameManager
     float pausingDuration = 2f;
 
     [SerializeField]
+    string endingSceneString = "Ending";
+
+    [SerializeField]
     CanvasGroup hudCg;
     private void Awake()
     {
@@ -94,7 +97,7 @@ public class GameManager : MonoBehaviour, IGameManager
 
     public void ShowResultScreen()
     {
-
+        SceneManager.LoadScene(endingSceneString);
     }
 
     [ContextMenu("Restart Game")]
