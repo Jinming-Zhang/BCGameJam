@@ -56,8 +56,8 @@ public class LoadingMenu : MonoBehaviour
         if (loadingTimer >= 10)
         {
             StopMenuMusic();
-            Debug.Log("Load main game");
-            //SceneManager.LoadScene(mainGame);
+            //Debug.Log("Load main game");
+            SceneManager.LoadScene(mainGame);
         }
     }
 
