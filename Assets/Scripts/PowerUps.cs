@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUps : MonoBehaviour, IPowerupable
 {
-    [SerializeField] private int powerValue;
+    public int powerValue;
     [SerializeField] private float minSpeed = 1f;
     [SerializeField] private float maxSpeed = 5f;
     [SerializeField] private float currSpeed;
@@ -33,6 +33,7 @@ public class PowerUps : MonoBehaviour, IPowerupable
         get { return maxSpeed; }
         set { maxSpeed = value; }
     }
+   
     private void Awake()
     {
         currSpeed = Random.Range(minSpeed, maxSpeed);
@@ -63,14 +64,7 @@ public class PowerUps : MonoBehaviour, IPowerupable
             var playerController = other.gameObject.GetComponent<TornandoPlayerController>();
             if (playerController == null) return;
             float playerPowerValue = playerController.PowerupCount;
-            if (playerPowerValue > powerValue)
-            {
-                playerController.DoPowerup(-1);
-            }
-            else
-            {
-                playerController.DoPowerup(1);
-            }
+            playerController.DoPowerup(powerValue);
 
             if (dontDestroyAfterTrigger) return;
             this.gameObject.SetActive(false);
