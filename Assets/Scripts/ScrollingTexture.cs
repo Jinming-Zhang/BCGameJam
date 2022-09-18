@@ -28,8 +28,9 @@ public class ScrollingTexture : MonoBehaviour
         // hoffset
         BgRenderer.material.mainTextureOffset += new Vector2(hspeed * Time.deltaTime, 0);
         // voffset
-        //float vOffset = vAmplitute * Mathf.Sin(vspeed);
-        //bgRenderer.material.mainTextureOffset += new Vector2(0, vOffset);
+        float vOffset = vAmplitute * Mathf.Sin(vspeed * Time.timeSinceLevelLoad);
+        Debug.Log(vOffset);
+        BgRenderer.material.mainTextureOffset += new Vector2(0, vOffset);
     }
     public void ResetOffset()
     {
