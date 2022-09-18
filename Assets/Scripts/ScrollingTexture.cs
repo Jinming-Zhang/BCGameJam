@@ -12,17 +12,27 @@ public class ScrollingTexture : MonoBehaviour
     float vAmplitute = .1f;
 
     Renderer bgRenderer;
-    private void Start()
+    Renderer BgRenderer
     {
-        bgRenderer = GetComponent<Renderer>();
+        get
+        {
+            if (!bgRenderer)
+            {
+                bgRenderer = GetComponent<Renderer>();
+            }
+            return bgRenderer;
+        }
     }
-
     private void Update()
     {
         // hoffset
-        bgRenderer.material.mainTextureOffset += new Vector2(hspeed * Time.deltaTime, 0);
+        BgRenderer.material.mainTextureOffset += new Vector2(hspeed * Time.deltaTime, 0);
         // voffset
         //float vOffset = vAmplitute * Mathf.Sin(vspeed);
         //bgRenderer.material.mainTextureOffset += new Vector2(0, vOffset);
+    }
+    public void ResetOffset()
+    {
+        BgRenderer.material.mainTextureOffset = Vector2.zero;
     }
 }

@@ -8,6 +8,13 @@ public class GameManager : MonoBehaviour, IGameManager
     private static GameManager instance;
     public static GameManager Instance => instance;
 
+    [SerializeField]
+    LandScroller landScroller;
+    [SerializeField]
+    float landInSpeed;
+    //[SerializeField]
+    //float midlandSlidSpeed = 7;
+
     [Header("Game Ending settings")]
     [SerializeField]
     GameObject endingBackground;
@@ -89,5 +96,45 @@ public class GameManager : MonoBehaviour, IGameManager
     public void StartGame()
     {
         gameRunning = true;
+    }
+
+    [ContextMenu("MovingIn Land")]
+    public void MovingInLand()
+    {
+        StartCoroutine(MovingLandInCR());
+        IEnumerator MovingLandInCR()
+        {
+            float distX = endingBackgroundDistination.transform.position.x;
+            Vector3 direction = (endingBackgroundDistination.transform.position - landScroller.PivotPos).normalized;
+            direction.y = 0;
+            direction.z = 0;
+            landScroller.StopLooping();
+            while (Mathf.Abs(landScroller.PivotPos.x - distX) > 0.1f)
+            {
+                landScroller.transform.position += direction * landInSpeed * Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+            landScroller.StartLooping();
+            yield return new WaitForSeconds(3);
+            MovingOutLand();
+        }
+
+
+    }
+    [ContextMenu("Moving out land")]
+    public void MovingOutLand()
+    {
+        StartCoroutine(MovingOutLandCR());
+        IEnumerator MovingOutLandCR()
+        {
+            landScroller.StopLooping();
+            while (landScroller.transform.position.x > -80)
+            {
+                Vector3 newPos = landScroller.transform.position;
+                newPos.x -= landInSpeed * Time.deltaTime;
+                landScroller.transform.position = newPos;
+                yield return new WaitForEndOfFrame();
+            }
+        }
     }
 }

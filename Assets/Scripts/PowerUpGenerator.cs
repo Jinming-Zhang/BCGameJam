@@ -27,7 +27,15 @@ public class PowerUpGenerator : MonoBehaviour
     IEnumerator CoolDown()
     {   float y = Random.Range(0, 1f);
         Vector2 cameraPos = Camera.main.ViewportToWorldPoint(new Vector2(1, y));
-        Instantiate(powerUpObj, new Vector3(cameraPos.x, cameraPos.y, 0),Quaternion.identity);
+        //Instantiate(powerUpObj, new Vector3(cameraPos.x, cameraPos.y, 0),Quaternion.identity);
+        Vector2 spawnPos = new Vector2(cameraPos.x, cameraPos.y);
+        GameObject powerups = ObjectPooling.SharedInstance.GetPooledObject();
+        if (powerups != null)
+        {
+            powerups.transform.position = spawnPos;
+            powerups.transform.rotation = Quaternion.identity;
+            powerups.SetActive(true);
+        }
         yield return new WaitForSeconds(coolDownTimer);
         StartCoroutine(CoolDown());
     }
