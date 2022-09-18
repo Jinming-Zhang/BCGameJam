@@ -5,12 +5,12 @@ using UnityEngine;
 public class PowerUps : MonoBehaviour, IPowerupable
 {
     [SerializeField] private int powerValue;
+    [SerializeField] private float speed = 1f;
 
-
-        //if player >= powerValue
-            //PowerUp
-        //else
-            //PowerDown
+    //if player >= powerValue
+    //PowerUp
+    //else
+    //PowerDown
     enum PowerUpType
     {
         Speed = 1,
@@ -18,6 +18,8 @@ public class PowerUps : MonoBehaviour, IPowerupable
         Force = 3
     }
     [SerializeField] PowerUpType powerUpType;
+    public float PowerUpMovement { get; private set; }
+
     public void ForceUp()
     {
         throw new System.NotImplementedException();
@@ -34,24 +36,29 @@ public class PowerUps : MonoBehaviour, IPowerupable
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
         var playerController = other.gameObject.GetComponent<TornandoPlayerController>();
         if (playerController == null) return;
-        int playerPowerValue = playerController.PowerupCount;
+        float playerPowerValue = playerController.PowerupCount;
         if (playerPowerValue < powerValue)
         {
-            playerController.DoPowerup(-1);
+            if (playerPowerValue <= 1f) {
+                //player dies
+            }
+            else { 
+                playerController.DoPowerup(-1);
+            }
         }
         else {
             playerController.DoPowerup(1);
         }
         Destroy(this.gameObject);
+    }
+    void Update()
+    {
+        transform.Translate(speed * Vector3.left * Time.deltaTime);
     }
 }
