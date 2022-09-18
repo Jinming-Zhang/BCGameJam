@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -935,6 +935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hudUI: {fileID: 367449903}
   resultUI: {fileID: 0}
+  gameArea: {fileID: 1224298776715147806}
   countdownText: {fileID: 666786484}
 --- !u!1 &1938466088 stripped
 GameObject:
@@ -1118,6 +1119,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33102ff6e8aa6404f94755ac8212e154, type: 3}
+--- !u!224 &1224298776715147806 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 669026123, guid: 33102ff6e8aa6404f94755ac8212e154,
+    type: 3}
+  m_PrefabInstance: {fileID: 1224298776715147805}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3124681206631580449
 PrefabInstance:
   m_ObjectHideFlags: 0
