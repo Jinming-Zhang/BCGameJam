@@ -5,6 +5,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.UIElements;
+using TMPro;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class TornandoPlayerController : PlayerController
@@ -18,6 +19,8 @@ public class TornandoPlayerController : PlayerController
     [SerializeField] private float scaleMax = 3.5f;
     [SerializeField] private float scaleMin = 1f;
     [SerializeField] private int powerUpMax = 5;
+
+    [SerializeField] private TextMeshProUGUI speedText;
 
     private BoxCollider2D box2D;
     private Vector2 viewportMin;
@@ -34,6 +37,9 @@ public class TornandoPlayerController : PlayerController
         viewportMax = UIManager.Instance.ViewportMax;
         box2D = GetComponent<BoxCollider2D>();
         transform.localScale = initialScale;
+        if (speedText != null) speedText.text = $"{(1 + PowerupCount) * 100}KM/H";
+        playerSpeedX = 1 + PowerupCount;
+        playerSpeedY = 1 + PowerupCount;
     }
 
     void Update()
@@ -68,7 +74,9 @@ public class TornandoPlayerController : PlayerController
         PowerupCount = Mathf.Clamp(PowerupCount, 0, PowerupMax);
         
         Debug.Log($"Player powerup count: {PowerupCount}");
-        
+        if (speedText != null) speedText.text = $"{(1+PowerupCount) * 100}KM/H";
+        playerSpeedX = 1 + PowerupCount;
+        playerSpeedY = 1 + PowerupCount;        
         var newLocalScale = transform.localScale;
         newLocalScale += Vector3.one * scaleStep * (isIncrease ? 1 : -1);
         newLocalScale.x = Mathf.Clamp(newLocalScale.x, scaleMin, scaleMax);
