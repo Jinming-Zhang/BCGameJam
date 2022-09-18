@@ -12,9 +12,11 @@ public class TornandoPlayerController : PlayerController
     [SerializeField] private float playerSpeedX = 1f;
     [SerializeField] private float playerSpeedY = 1f;
     [SerializeField] private int initialPowerupCount = 0;
-    [SerializeField] private float scaleStep = .1f;
-    [SerializeField] private float scaleMax = 2f;
-    [SerializeField] private float scaleMin = .1f;
+    [SerializeField] private Vector3 initialScale = new Vector3(1, 1, 1);
+    
+    [SerializeField] private float scaleStep = .5f;
+    [SerializeField] private float scaleMax = 3.5f;
+    [SerializeField] private float scaleMin = 1f;
     [SerializeField] private int powerUpMax = 5;
 
     private BoxCollider2D box2D;
@@ -31,6 +33,7 @@ public class TornandoPlayerController : PlayerController
         viewportMin = UIManager.Instance.ViewportMin;
         viewportMax = UIManager.Instance.ViewportMax;
         box2D = GetComponent<BoxCollider2D>();
+        transform.localScale = initialScale;
     }
 
     void Update()
@@ -60,10 +63,11 @@ public class TornandoPlayerController : PlayerController
     {
         var isIncrease = value < PowerupCount || PowerupCount == PowerupMax;
         if(isIncrease) PowerupCount++; else PowerupCount--;
+        if (PowerupCount < 0) DoDie();
+        
         PowerupCount = Mathf.Clamp(PowerupCount, 0, PowerupMax);
         
         Debug.Log($"Player powerup count: {PowerupCount}");
-        if (PowerupCount < 0) DoDie();
         
         var newLocalScale = transform.localScale;
         newLocalScale += Vector3.one * scaleStep * (isIncrease ? 1 : -1);

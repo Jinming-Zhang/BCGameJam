@@ -203,12 +203,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d5afd2ac0ffeb84481cdd3c96173c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeedX: 1
-  playerSpeedY: 1
-  initialPowerupCount: 1
+  playerSpeedX: 3
+  playerSpeedY: 3
+  initialPowerupCount: 0
   scaleStep: 0.1
   scaleMax: 2
   scaleMin: 0.1
+  powerUpMax: 4
 --- !u!61 &7032657837366249626
 BoxCollider2D:
   m_ObjectHideFlags: 0
