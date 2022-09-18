@@ -115,6 +115,8 @@ public class GameManager : MonoBehaviour, IGameManager
                 yield return new WaitForEndOfFrame();
             }
             landScroller.StartLooping();
+            yield return new WaitForSeconds(3);
+            MovingOutLand();
         }
 
 
