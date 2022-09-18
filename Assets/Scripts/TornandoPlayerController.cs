@@ -38,11 +38,13 @@ public class TornandoPlayerController : PlayerController
     public override void DoPowerup(float value)
     {
         PowerupCount += value;
+        Debug.Log($"Player powerup count: {PowerupCount}");
         if (PowerupCount < 0) DoDie();
     }
 
     private void DoDie()
     {
+        Debug.Log("Player Died");
         GameManager.Instance.EndGame();
     }
     
