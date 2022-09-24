@@ -860,6 +860,7 @@ MonoBehaviour:
   endingBackgroundDistination: {fileID: 1120208911}
   slidingSpeed: 5
   pausingDuration: 2
+  endingSceneString: Ending
   hudCg: {fileID: 2078736282}
   gameDurationInSec: 20
 --- !u!4 &470309364
@@ -2393,7 +2394,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1938466090, guid: 8ec8e7d0992f3e346b972510c5b7f93f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8ec8e7d0992f3e346b972510c5b7f93f, type: 3}
 --- !u!4 &3124681206631580450 stripped
 Transform:
