@@ -7,6 +7,7 @@ public class PowerUpGenerator : MonoBehaviour
     [SerializeField] private List<GameObject> powerUpObj;
     [SerializeField] private int coolDownTimer = 3;
     public List<Sprite> sprites;
+
     //Const
     //private Vector3 xPosition = Camera.main.ViewportToWorldPoint(1,0.5,0);
 
@@ -35,7 +36,8 @@ public class PowerUpGenerator : MonoBehaviour
             int index = Random.Range(0, sprites.Count);
             spriteImage.sprite = sprites[index];
             
-            powerups.GetComponent<PowerUps>().powerValue=index;
+            powerups.GetComponent<PowerUps>().powerValue=index+1;
+            powerups.GetComponent<PowerUps>().powerExperience = (index+1) * 100;
             PolygonCollider2D polyCollider = powerups.GetComponent(typeof(PolygonCollider2D)) as PolygonCollider2D;
             Destroy(polyCollider);
             PolygonCollider2D newPolyColliderpowerups = powerups.AddComponent(typeof(PolygonCollider2D)) as PolygonCollider2D;

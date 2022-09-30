@@ -29,6 +29,13 @@ public class GameManager : MonoBehaviour, IGameManager
 
     [SerializeField]
     CanvasGroup hudCg;
+
+    [SerializeField]
+    Texture2D defaultEndingTexture;
+    [SerializeField]
+    Texture2D successfulEndingTexture;
+    [SerializeField]
+    Material endingBackgroundMaterial;
     private void Awake()
     {
         if (instance && instance != this)
@@ -64,10 +71,22 @@ public class GameManager : MonoBehaviour, IGameManager
             }
         }
     }
+    public void ChangeEndingMaterial(bool success)
+    {
+        if (success)
+        {
+            endingBackgroundMaterial.mainTexture = successfulEndingTexture;
+        }
+        else
+        {
+            endingBackgroundMaterial.mainTexture=  defaultEndingTexture;
+        }
+    }
 
     [ContextMenu("End Game")]
     public void EndGame()
     {
+
         StartCoroutine(MovingEndingInCR());
         StartCoroutine(FadingOutCanvasCR());
 

@@ -33,7 +33,7 @@ public class TornandoPlayerController : PlayerController
         viewportMax = UIManager.Instance.ViewportMax;
         box2D = GetComponent<BoxCollider2D>();
         transform.localScale = initialScale;
-        if (speedText != null) speedText.text = $"{(1 + PowerupCount) * 100}KM/H";
+        if (speedText != null) speedText.text = $"{( PowerupCount) * 100}KM/H";
         playerSpeedX = 1 + PowerupCount;
         playerSpeedY = 1 + PowerupCount;
     }
@@ -70,7 +70,7 @@ public class TornandoPlayerController : PlayerController
         PowerupCount = Mathf.Clamp(PowerupCount, 0, PowerupMax);
         
         Debug.Log($"Player powerup count: {PowerupCount}");
-        if (speedText != null) speedText.text = $"{(1+PowerupCount) * 100}KM/H";
+        if (speedText != null) speedText.text = $"{(PowerupCount) * 100}KM/H";
         playerSpeedX = 1 + PowerupCount;
         playerSpeedY = 1 + PowerupCount;        
         var newLocalScale = transform.localScale;

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PowerUps : MonoBehaviour, IPowerupable
 {
     public int powerValue;
+    public int powerExperience;
     [SerializeField] private float minSpeed = 1f;
     [SerializeField] private float maxSpeed = 5f;
     [SerializeField] private float currSpeed;
@@ -63,8 +64,8 @@ public class PowerUps : MonoBehaviour, IPowerupable
         {
             var playerController = other.gameObject.GetComponent<TornandoPlayerController>();
             if (playerController == null) return;
-            playerController.DoPowerup(powerValue);
-
+            PowerLevel powerLevel = other.gameObject.GetComponent<PowerLevel>();
+            powerLevel.UpdateXP(powerValue);
             if (dontDestroyAfterTrigger) return;
             this.gameObject.SetActive(false);
         }
