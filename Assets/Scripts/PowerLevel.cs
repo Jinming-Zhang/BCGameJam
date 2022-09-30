@@ -58,6 +58,7 @@ public class PowerLevel : MonoBehaviour
             {
                 GameManager.Instance.ChangeEndingMaterial(false);
                 cityImageHolder.sprite = cities[0];
+
                 speedText.text = "A category " + playerController.PowerupCount + " tornado is approaching!";
             }
         }
