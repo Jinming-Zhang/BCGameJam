@@ -48,10 +48,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerValue: 0
+  powerExperience: 0
   minSpeed: 1
   maxSpeed: 5
   currSpeed: 0
   countDownTime: 3
+  spriteRenderer: {fileID: 6447205425700790100}
+  caneatBG: {fileID: 0}
+  donteatBG: {fileID: 0}
   powerUpType: 0
   dontDestroyAfterTrigger: 0
 --- !u!212 &6447205425700790100
@@ -144,7 +148,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.12, y: 1.272}
+    oldSize: {x: 1.8666667, y: 2.12}
     newSize: {x: 1.12, y: 1.272}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

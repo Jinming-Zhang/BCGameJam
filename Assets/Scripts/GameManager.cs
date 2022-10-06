@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -49,10 +50,13 @@ public class GameManager : MonoBehaviour, IGameManager
     }
 
     [SerializeField]
-    float gameDurationInSec = 120;
+    float gameDurationInSec = 200;
 
     private float timeCounter;
     private bool gameRunning;
+
+    bool movedInLand;
+    bool movedOutLand;
     private void Start()
     {
         StartGame();
@@ -69,6 +73,16 @@ public class GameManager : MonoBehaviour, IGameManager
                 gameRunning = false;
                 EndGame();
             }
+            if (timeCounter > gameDurationInSec / 3f && !movedInLand)
+            {
+                movedInLand = true;
+                MovingInLand();
+            }
+            else if (timeCounter > gameDurationInSec * 0.666f && !movedOutLand)
+            {
+                movedOutLand = true;
+                MovingOutLand();
+            }
         }
     }
     public void ChangeEndingMaterial(bool success)
@@ -79,7 +93,7 @@ public class GameManager : MonoBehaviour, IGameManager
         }
         else
         {
-            endingBackgroundMaterial.mainTexture=  defaultEndingTexture;
+            endingBackgroundMaterial.mainTexture = defaultEndingTexture;
         }
     }
 
