@@ -19,11 +19,13 @@ public class LoadingMenu : MonoBehaviour
 
     [SerializeField] GameObject tornado;
 
+    [SerializeField] List<AudioClip> gameAudios;
     // Start is called before the first frame update
     void Start()
     {
         audioSound = gustSound.GetComponent<AudioSource>();
     }
+
 
     // Update is called once per frame
     void Update()
@@ -46,36 +48,27 @@ public class LoadingMenu : MonoBehaviour
         audioSound.Play();
     }
 
-    public void StopMenuMusic()
-    {
-        if (GameObject.FindGameObjectWithTag("BG Music") != null)
-        {
-            GameObject.FindGameObjectWithTag("BG Music").GetComponent<BGMusic>().StopMusic();
-        }
-    }
 
     private void TransitionToMainGame()
     {
-        if(loadingTimer >= 8)
+        if (loadingTimer >= 8)
         {
             if (GameObject.FindGameObjectWithTag("BG Music") != null)
             {
-                GameObject.FindGameObjectWithTag("BG Music").GetComponent<BGMusic>().FadeMusic();
             }
         }
-        
+
         if (loadingTimer >= 10)
         {
-            StopMenuMusic();
-            //Debug.Log("Load main game");
             SceneManager.LoadScene(mainGame);
+            BGMusic.Instance.PlayMusic(gameAudios[Random.Range(0, gameAudios.Count)]);
         }
     }
 
     private void UpdateButterflyImage()
     {
         float imageNo = loadingTimer % 2;
-        if(imageNo != 0)
+        if (imageNo != 0)
         {
             button.GetComponent<Image>().sprite = butterfly2; //load image 2
         }
@@ -90,5 +83,5 @@ public class LoadingMenu : MonoBehaviour
     {
         float scale = loadingTimer / 10;
         tornado.transform.localScale = new Vector3(scale, scale, 0);
-    }    
+    }
 }

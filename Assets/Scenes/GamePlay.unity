@@ -787,6 +787,11 @@ MonoBehaviour:
     type: 3}
   endingBackgroundMaterial: {fileID: 2100000, guid: a40aaf00b97310c47a9e41dd2068fb24,
     type: 2}
+  gameEndClip: {fileID: 0}
+  winClip: {fileID: 8300000, guid: 94ed7ea2a53cc3141ae5737aa5566056, type: 3}
+  loseClip: {fileID: 8300000, guid: 3d7cbc786fd5ddf41958e08b20e362ab, type: 3}
+  vc: {fileID: 3124681206631580451}
+  shakeIntensity: 1
   gameDurationInSec: 100
 --- !u!4 &470309364
 Transform:
@@ -885,6 +890,16 @@ PrefabInstance:
       propertyPath: powerUpMax
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6874981025329413298, guid: a0e00c26bca399442a3c22867750cd6f,
+        type: 3}
+      propertyPath: powerupclip
+      value: 
+      objectReference: {fileID: 8300000, guid: c27a73b22b5f1f746adae6b46ef35a70, type: 3}
+    - target: {fileID: 6874981025329413298, guid: a0e00c26bca399442a3c22867750cd6f,
+        type: 3}
+      propertyPath: powerdownclip
+      value: 
+      objectReference: {fileID: 8300000, guid: 82ae47ffec2d02c43a2d52e17c441607, type: 3}
     - target: {fileID: 6874981025329413298, guid: a0e00c26bca399442a3c22867750cd6f,
         type: 3}
       propertyPath: initialPowerupCount
@@ -2784,3 +2799,38 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3124681206631580449}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3124681206631580451 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3124681206674761993, guid: 8ec8e7d0992f3e346b972510c5b7f93f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3124681206631580449}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &3124681206631580452 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3124681206686362459, guid: 8ec8e7d0992f3e346b972510c5b7f93f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3124681206631580449}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3124681206631580453
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3124681206631580452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 50
+  mNoiseOffsets: {x: 0, y: 0, z: 0}

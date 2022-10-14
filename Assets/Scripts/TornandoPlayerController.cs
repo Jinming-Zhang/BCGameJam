@@ -2,6 +2,7 @@
 using UnityEngine;
 
 using TMPro;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class TornandoPlayerController : PlayerController
@@ -27,6 +28,11 @@ public class TornandoPlayerController : PlayerController
 
     public int PowerupCount { get; private set; }
     public int PowerupMax => powerUpMax;
+
+    [SerializeField]
+    AudioClip powerupclip;
+    [SerializeField]
+    AudioClip powerdownclip;
     private void Awake()
     {
         if (instance && !instance == this)
@@ -73,11 +79,29 @@ public class TornandoPlayerController : PlayerController
         transform.position += move * Time.deltaTime;
 
     }
-
+    public void PlayPowerSFX(bool up)
+    {
+        if (up)
+        {
+            BGMusic.Instance.PlaySFX(powerupclip);
+        }
+        else
+        {
+            BGMusic.Instance.PlaySFX(powerdownclip);
+            GameManager.Instance.ShakeCamera();
+        }
+    }
     public override void DoPowerup(int value)
     {
         var isIncrease = value < PowerupCount || PowerupCount == PowerupMax;
-        if (isIncrease) PowerupCount++; else PowerupCount--;
+        if (isIncrease)
+        {
+            PowerupCount++;
+        }
+        else
+        {
+            PowerupCount--;
+        }
         if (PowerupCount < 0) DoDie();
 
         PowerupCount = Mathf.Clamp(PowerupCount, 0, PowerupMax);

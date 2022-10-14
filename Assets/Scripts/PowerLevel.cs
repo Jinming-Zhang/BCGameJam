@@ -22,6 +22,7 @@ public class PowerLevel : MonoBehaviour
 
         if (powerValue > playerController.PowerupCount)
         {
+            playerController.PlayPowerSFX(false);
             if (currentXP > 0)
             {
                 resetXP();
@@ -34,6 +35,7 @@ public class PowerLevel : MonoBehaviour
         }
         else
         {
+            playerController.PlayPowerSFX(true);
             currentXP += powerValue * 100;
             if (currentXP >= playerController.PowerupCount * 200)
             {
@@ -42,29 +44,30 @@ public class PowerLevel : MonoBehaviour
             }
 
         }
-            UIUpdate();
+        UIUpdate();
 
     }
-        void UIUpdate()
+    void UIUpdate()
+    {
+        xpBar.value = (float)currentXP / (playerController.PowerupCount * 200f);
+        if (playerController.PowerupCount >= 3)
         {
-            xpBar.value = (float)currentXP / (playerController.PowerupCount * 200f);
-            if (playerController.PowerupCount >= 3)
-            {
-                cityImageHolder.sprite = cities[1];
-                GameManager.Instance.ChangeEndingMaterial(true);
-                speedText.text = "EMERGENCY!A category " + playerController.PowerupCount + " tornado is approaching!";
-            }
-            else
-            {
-                GameManager.Instance.ChangeEndingMaterial(false);
-                cityImageHolder.sprite = cities[0];
-
-                speedText.text = "A category " + playerController.PowerupCount + " tornado is approaching!";
-            }
+            cityImageHolder.sprite = cities[1];
+            GameManager.Instance.ChangeEndingMaterial(true);
+            speedText.text = "EMERGENCY!A category " + playerController.PowerupCount + " tornado is approaching!";
         }
-    
+        else
+        {
+            GameManager.Instance.ChangeEndingMaterial(false);
+            cityImageHolder.sprite = cities[0];
 
-    public void resetXP() {
+            speedText.text = "A category " + playerController.PowerupCount + " tornado is approaching!";
+        }
+    }
+
+
+    public void resetXP()
+    {
         currentXP = 0;
 
     }

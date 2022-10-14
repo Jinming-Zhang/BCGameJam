@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -37,6 +38,21 @@ public class GameManager : MonoBehaviour, IGameManager
     Texture2D successfulEndingTexture;
     [SerializeField]
     Material endingBackgroundMaterial;
+
+    public AudioClip gameEndClip;
+    [SerializeField]
+    AudioClip winClip;
+    [SerializeField]
+    AudioClip loseClip;
+
+    bool gameEnded = false;
+    bool shakingCamera = false;
+    [SerializeField]
+    float shakeDuration = .5f;
+    [SerializeField]
+    CinemachineVirtualCamera vc;
+    [SerializeField]
+    float shakeIntensity;
     private void Awake()
     {
         if (instance && instance != this)
@@ -47,6 +63,7 @@ public class GameManager : MonoBehaviour, IGameManager
         {
             instance = this;
         }
+        gameEnded = false;
     }
 
     [SerializeField]
@@ -90,20 +107,25 @@ public class GameManager : MonoBehaviour, IGameManager
         if (success)
         {
             endingBackgroundMaterial.mainTexture = successfulEndingTexture;
+            gameEndClip = winClip;
         }
         else
         {
             endingBackgroundMaterial.mainTexture = defaultEndingTexture;
+            gameEndClip = loseClip;
         }
     }
 
     [ContextMenu("End Game")]
     public void EndGame()
     {
-
-        StartCoroutine(MovingEndingInCR());
-        StartCoroutine(FadingOutCanvasCR());
-
+        if (!gameEnded)
+        {
+            gameEnded = true;
+            StartCoroutine(MovingEndingInCR());
+            StartCoroutine(FadingOutCanvasCR());
+            BGMusic.Instance.PlayMusic(gameEndClip);
+        }
         IEnumerator MovingEndingInCR()
         {
             Vector3 pos = endingBackgroundDistination.transform.position;
@@ -180,6 +202,23 @@ public class GameManager : MonoBehaviour, IGameManager
                 landScroller.transform.position = newPos;
                 yield return new WaitForEndOfFrame();
             }
+        }
+    }
+
+    public void ShakeCamera()
+    {
+        if (!shakingCamera)
+        {
+            shakingCamera = true;
+            StartCoroutine(shakeItOff());
+        }
+        IEnumerator shakeItOff()
+        {
+            CinemachineBasicMultiChannelPerlin noisy = vc.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            noisy.m_AmplitudeGain = shakeIntensity;
+            yield return new WaitForSeconds(shakeDuration);
+            noisy.m_AmplitudeGain = 0;
+            shakingCamera = false;
         }
     }
 }
