@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 public class PowerLevel : MonoBehaviour
 {
-    int currentXP = 0;
+    public int currentXP = 0;
     TornandoPlayerController playerController;
     public TextMeshProUGUI speedText;
     public Image cityImageHolder;

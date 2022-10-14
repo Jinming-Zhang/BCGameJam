@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Ending : MonoBehaviour
@@ -15,32 +16,63 @@ public class Ending : MonoBehaviour
     private int randomNo;
     [SerializeField] GameObject darkGodLaugh;
 
-    private bool isPlayEnding = false;
+    [SerializeField]
+    List<Sprite> slideShow;
+    //private bool isPlayEnding = false;
 
     // Start is called before the first frame update
+    [SerializeField]
+    FinalScoreText scoreText;
+    bool listenToRestart = false;
     void Start()
     {
-        //GetComponent<Image>().sprite = paris;
-        randomNo = Random.Range(0, 1);
-        Debug.Log(randomNo);
+        scoreText.gameObject.SetActive(false);
+        StartCoroutine(SlideShowCR());
+        listenToRestart = false;
+    }
+    IEnumerator SlideShowCR()
+    {
+        for (int i = 0; i < slideShow.Count; i++)
+        {
+            background.GetComponent<Image>().sprite = slideShow[i];
+            yield return new WaitForSeconds(5f);
+        }
+        FlashDarkGod();
+        yield return new WaitForSeconds(3f);
+        ShowScore();
+        listenToRestart = true;
     }
 
+    void ShowScore()
+    {
+        background.GetComponent<Image>().sprite = newsPaper;
+        scoreText.gameObject.SetActive(true);
+        scoreText.Refresh();
+    }
     // Update is called once per frame
     void Update()
     {
-        if (randomNo == 0 && !isPlayEnding)
+        if (listenToRestart)
         {
-            Debug.Log("Ending 1");
-            isPlayEnding = true;
-            StartCoroutine(Ending1());
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                BGMusic.Instance.Restart();
+                SceneManager.LoadScene(0);
+            }
         }
-        if(randomNo > 0 && !isPlayEnding)
-        {
-            Debug.Log("Ending 2");
-            isPlayEnding = true;
-           StartCoroutine(Ending2());
-        }
-        
+        //if (randomNo == 0 && !isPlayEnding)
+        //{
+        //    Debug.Log("Ending 1");
+        //    isPlayEnding = true;
+        //    StartCoroutine(Ending1());
+        //}
+        //if (randomNo > 0 && !isPlayEnding)
+        //{
+        //    Debug.Log("Ending 2");
+        //    isPlayEnding = true;
+        //    StartCoroutine(Ending2());
+        //}
+
     }
 
     public IEnumerator Ending1()

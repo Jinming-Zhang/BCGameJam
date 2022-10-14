@@ -327,6 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19117bc847f3fc7408c3bfb94b515e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentXP: 0
   speedText: {fileID: 963099660}
   cityImageHolder: {fileID: 2043606238}
   cities:
@@ -779,9 +780,10 @@ MonoBehaviour:
   endingBackgroundDistination: {fileID: 1120208911}
   slidingSpeed: 5
   pausingDuration: 2
-  endingSceneString: Ending
+  endingSceneWinningString: Ending Win
+  endingSceneLoseString: Ending Lose
   hudCg: {fileID: 2078736282}
-  defaultEndingTexture: {fileID: 2800000, guid: 16a8ff95c06e6934693c717a168d9da8,
+  defaultEndingTexture: {fileID: 2800000, guid: d6329de8fbe099242a8964c478042995,
     type: 3}
   successfulEndingTexture: {fileID: 2800000, guid: 5e297bd127b1c1e448fd0e6fce0a4aa2,
     type: 3}
@@ -790,8 +792,10 @@ MonoBehaviour:
   gameEndClip: {fileID: 0}
   winClip: {fileID: 8300000, guid: 94ed7ea2a53cc3141ae5737aa5566056, type: 3}
   loseClip: {fileID: 8300000, guid: 3d7cbc786fd5ddf41958e08b20e362ab, type: 3}
+  shakeDuration: 0.5
   vc: {fileID: 3124681206631580451}
   shakeIntensity: 1
+  finalScore: {fileID: 11400000, guid: fd7dd7617654fba44a741c703a43521e, type: 2}
   gameDurationInSec: 100
 --- !u!4 &470309364
 Transform:
@@ -2831,6 +2835,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
-  m_AmplitudeGain: 1
+  m_AmplitudeGain: 0
   m_FrequencyGain: 50
   mNoiseOffsets: {x: 0, y: 0, z: 0}

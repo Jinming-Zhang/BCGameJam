@@ -33,6 +33,10 @@ public class BGMusic : MonoBehaviour
     {
         PlayMusic(startingclip);
     }
+    public void Restart()
+    {
+        PlayMusic(startingclip);
+    }
 
     public void PlayMusic(AudioClip clip)
     {

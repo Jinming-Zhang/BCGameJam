@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GamePlay.unity
     guid: 21f4e815de68f624ea437e9343d380a3
   - enabled: 1
-    path: Assets/Scenes/Ending.unity
+    path: Assets/Scenes/Ending Win.unity
     guid: 870917e0b02fc0a44a2a37cab2f245b0
+  - enabled: 1
+    path: Assets/Scenes/Ending Lose.unity
+    guid: c665c24433e21f2419f7c72a40ecea02
   m_configObjects: {}

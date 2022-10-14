@@ -27,8 +27,12 @@ public class GameManager : MonoBehaviour, IGameManager
     float pausingDuration = 2f;
 
     [SerializeField]
-    string endingSceneString = "Ending";
+    string endingSceneWinningString = "Ending";
 
+    [SerializeField]
+    string endingSceneLoseString = "Ending";
+
+    string endingSceneFinalString;
     [SerializeField]
     CanvasGroup hudCg;
 
@@ -53,6 +57,10 @@ public class GameManager : MonoBehaviour, IGameManager
     CinemachineVirtualCamera vc;
     [SerializeField]
     float shakeIntensity;
+    [SerializeField]
+    PersistantNumber finalScore;
+
+
     private void Awake()
     {
         if (instance && instance != this)
@@ -108,11 +116,13 @@ public class GameManager : MonoBehaviour, IGameManager
         {
             endingBackgroundMaterial.mainTexture = successfulEndingTexture;
             gameEndClip = winClip;
+            endingSceneFinalString = endingSceneWinningString;
         }
         else
         {
             endingBackgroundMaterial.mainTexture = defaultEndingTexture;
             gameEndClip = loseClip;
+            endingSceneFinalString = endingSceneLoseString;
         }
     }
 
@@ -125,6 +135,7 @@ public class GameManager : MonoBehaviour, IGameManager
             StartCoroutine(MovingEndingInCR());
             StartCoroutine(FadingOutCanvasCR());
             BGMusic.Instance.PlayMusic(gameEndClip);
+            finalScore.Score = getPlayerScore();
         }
         IEnumerator MovingEndingInCR()
         {
@@ -150,9 +161,15 @@ public class GameManager : MonoBehaviour, IGameManager
         }
     }
 
+    float getPlayerScore()
+    {
+        int lv = TornandoPlayerController.Instance.PowerupCount;
+        int xp = TornandoPlayerController.Instance.GetComponent<PowerLevel>().currentXP;
+        return lv * 200 + xp;
+    }
     public void ShowResultScreen()
     {
-        SceneManager.LoadScene(endingSceneString);
+        SceneManager.LoadScene(endingSceneFinalString);
     }
 
     [ContextMenu("Restart Game")]
